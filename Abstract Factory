@@ -1,0 +1,70 @@
+from abc import ABC, abstractmethod
+
+# Абстрактна фабрика
+class GUIFactory(ABC):
+    @abstractmethod
+    def create_button(self):
+        pass
+
+    @abstractmethod
+    def create_checkbox(self):
+        pass
+
+# Конкретні фабрики
+class WindowsFactory(GUIFactory):
+    def create_button(self):
+        return WindowsButton()
+
+    def create_checkbox(self):
+        return WindowsCheckbox()
+
+class MacOSFactory(GUIFactory):
+    def create_button(self):
+        return MacOSButton()
+
+    def create_checkbox(self):
+        return MacOSCheckbox()
+
+# Абстрактні продукти
+class Button(ABC):
+    @abstractmethod
+    def paint(self):
+        pass
+
+class Checkbox(ABC):
+    @abstractmethod
+    def paint(self):
+        pass
+
+# Конкретні продукти
+class WindowsButton(Button):
+    def paint(self):
+        return "Віконна кнопка"
+
+class WindowsCheckbox(Checkbox):
+    def paint(self):
+        return "Віконний чекбокс"
+
+class MacOSButton(Button):
+    def paint(self):
+        return "Кнопка MacOS"
+
+class MacOSCheckbox(Checkbox):
+    def paint(self):
+        return "Чекбокс MacOS"
+
+# Використання
+def client_code(factory: GUIFactory):
+    button = factory.create_button()
+    checkbox = factory.create_checkbox()
+    
+    print(button.paint())
+    print(checkbox.paint())
+
+# Виклик для Windows
+windows_factory = WindowsFactory()
+client_code(windows_factory)
+
+# Виклик для MacOS
+macos_factory = MacOSFactory()
+client_code(macos_factory)
