@@ -1,0 +1,32 @@
+class Visitor:
+    def visit(self, element):
+        pass
+
+class ConcreteVisitorA(Visitor):
+    def visit(self, element):
+        print(f"Відвідувач A обробляє {element.name}")
+
+class ConcreteVisitorB(Visitor):
+    def visit(self, element):
+        print(f"Відвідувач B обробляє {element.name}")
+
+class Element:
+    def accept(self, visitor):
+        visitor.visit(self)
+
+class ConcreteElementA(Element):
+    def __init__(self):
+        self.name = "ConcreteElementA"
+
+class ConcreteElementB(Element):
+    def __init__(self):
+        self.name = "ConcreteElementB"
+
+# Використання
+elements = [ConcreteElementA(), ConcreteElementB()]
+visitor_a = ConcreteVisitorA()
+visitor_b = ConcreteVisitorB()
+
+for element in elements:
+    element.accept(visitor_a)  # Виклик для відвідувача A
+    element.accept(visitor_b)  # Виклик для відвідувача B
