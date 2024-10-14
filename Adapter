@@ -1,0 +1,20 @@
+class EuropeanSocket:
+    def connect(self):
+        return "Підключено до європейської розетки."
+
+class AmericanSocket:
+    def connect(self):
+        return "Підключено до американської розетки."
+
+class Adapter:
+    def __init__(self, european_socket: EuropeanSocket):
+        self.european_socket = european_socket
+
+    def connect(self):
+        return self.european_socket.connect()
+
+# Використання
+euro_socket = EuropeanSocket()
+adapter = Adapter(euro_socket)
+
+print(adapter.connect())  # Виведе: Підключено до європейської розетки.
