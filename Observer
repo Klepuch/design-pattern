@@ -1,0 +1,36 @@
+class Subject:
+    def __init__(self):
+        self._observers = []
+
+    def attach(self, observer):
+        self._observers.append(observer)
+
+    def detach(self, observer):
+        self._observers.remove(observer)
+
+    def notify(self):
+        for observer in self._observers:
+            observer.update()
+
+class Observer:
+    def update(self):
+        pass
+
+class ConcreteObserver(Observer):
+    def __init__(self, name):
+        self.name = name
+
+    def update(self):
+        print(f"{self.name} отримав сповіщення!")
+
+# Використання
+subject = Subject()
+
+observer1 = ConcreteObserver("Спостерігач 1")
+observer2 = ConcreteObserver("Спостерігач 2")
+
+subject.attach(observer1)
+subject.attach(observer2)
+
+# Виклик сповіщення
+subject.notify()
