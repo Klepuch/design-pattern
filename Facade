@@ -1,0 +1,24 @@
+class Engine:
+    def start(self):
+        return "Двигун запущено."
+
+class Lights:
+    def turn_on(self):
+        return "Лампи включені."
+
+class AirConditioning:
+    def set_temperature(self, temperature):
+        return f"Кондиціонер налаштовано на {temperature} градусів."
+
+class CarFacade:
+    def __init__(self):
+        self.engine = Engine()
+        self.lights = Lights()
+        self.air_conditioning = AirConditioning()
+
+    def start_car(self):
+        return f"{self.engine.start()} {self.lights.turn_on()} {self.air_conditioning.set_temperature(22)}"
+
+# Використання
+car = CarFacade()
+print(car.start_car())
