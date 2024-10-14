@@ -1,0 +1,27 @@
+class Handler:
+    def __init__(self, successor=None):
+        self.successor = successor
+
+    def handle_request(self, request):
+        if self.successor:
+            return self.successor.handle_request(request)
+        return "Запит не оброблено."
+
+class ConcreteHandlerA(Handler):
+    def handle_request(self, request):
+        if request == "A":
+            return "Оброблено в ConcreteHandlerA"
+        return super().handle_request(request)
+
+class ConcreteHandlerB(Handler):
+    def handle_request(self, request):
+        if request == "B":
+            return "Оброблено в ConcreteHandlerB"
+        return super().handle_request(request)
+
+# Використання
+handler_chain = ConcreteHandlerA(ConcreteHandlerB())
+
+print(handler_chain.handle_request("A"))  # Виведе: Оброблено в ConcreteHandlerA
+print(handler_chain.handle_request("B"))  # Виведе: Оброблено в ConcreteHandlerB
+print(handler_chain.handle_request("C"))  # Виведе: Запит не оброблено.
