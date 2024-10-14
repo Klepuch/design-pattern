@@ -1,0 +1,54 @@
+class Mediator:
+    def notify(self, sender, event):
+        pass
+
+class ConcreteMediator(Mediator):
+    def __init__(self, component1, component2):
+        self.component1 = component1
+        self.component1.set_mediator(self)
+        self.component2 = component2
+        self.component2.set_mediator(self)
+
+    def notify(self, sender, event):
+        if event == "A":
+            print("Посередник: реагую на подію A.")
+            self.component2.do_something()
+        elif event == "B":
+            print("Посередник: реагую на подію B.")
+            self.component1.do_something()
+
+class Component1:
+    def __init__(self):
+        self.mediator = None
+
+    def set_mediator(self, mediator):
+        self.mediator = mediator
+
+    def do_something(self):
+        print("Компонент 1: виконує дію.")
+
+    def trigger_event(self):
+        print("Компонент 1: тригерить подію A.")
+        self.mediator.notify(self, "A")
+
+class Component2:
+    def __init__(self):
+        self.mediator = None
+
+    def set_mediator(self, mediator):
+        self.mediator = mediator
+
+    def do_something(self):
+        print("Компонент 2: виконує дію.")
+
+    def trigger_event(self):
+        print("Компонент 2: тригерить подію B.")
+        self.mediator.notify(self, "B")
+
+# Використання
+component1 = Component1()
+component2 = Component2()
+mediator = ConcreteMediator(component1, component2)
+
+component1.trigger_event()  # Тригерить подію A
+component2.trigger_event()  # Тригерить подію B
