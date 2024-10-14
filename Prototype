@@ -1,0 +1,23 @@
+import copy
+
+class Prototype:
+    def clone(self):
+        return copy.deepcopy(self)
+
+class ConcretePrototypeA(Prototype):
+    def __init__(self):
+        self.name = "Прототип A"
+
+class ConcretePrototypeB(Prototype):
+    def __init__(self):
+        self.name = "Прототип B"
+
+# Використання
+prototype_a = ConcretePrototypeA()
+prototype_b = ConcretePrototypeB()
+
+cloned_a = prototype_a.clone()
+cloned_b = prototype_b.clone()
+
+print(cloned_a.name)  # Виведе: Прототип A
+print(cloned_b.name)  # Виведе: Прототип B
