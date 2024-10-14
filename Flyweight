@@ -1,0 +1,26 @@
+class Flyweight:
+    def __init__(self, intrinsic_state):
+        self.intrinsic_state = intrinsic_state
+
+    def operation(self, extrinsic_state):
+        return f"Внутрішній стан: {self.intrinsic_state}, Зовнішній стан: {extrinsic_state}"
+
+class FlyweightFactory:
+    def __init__(self):
+        self.flyweights = {}
+
+    def get_flyweight(self, intrinsic_state):
+        if intrinsic_state not in self.flyweights:
+            self.flyweights[intrinsic_state] = Flyweight(intrinsic_state)
+        return self.flyweights[intrinsic_state]
+
+# Використання
+factory = FlyweightFactory()
+
+flyweight1 = factory.get_flyweight("Спільний стан 1")
+flyweight2 = factory.get_flyweight("Спільний стан 2")
+flyweight3 = factory.get_flyweight("Спільний стан 1")  # Знову отримаємо той же об'єкт
+
+print(flyweight1.operation("Унікальний стан A"))  # Виведе: Внутрішній стан: Спільний стан 1, Зовнішній стан: Унікальний стан A
+print(flyweight2.operation("Унікальний стан B"))  # Виведе: Внутрішній стан: Спільний стан 2, Зовнішній стан: Унікальний стан B
+print(flyweight3.operation("Унікальний стан C"))  # Виведе: Внутрішній стан: Спільний стан 1, Зовнішній стан: Унікальний стан C
