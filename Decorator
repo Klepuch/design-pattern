@@ -1,0 +1,13 @@
+def decorator_function(original_function):
+    def wrapper_function():
+        print("Додаткова функціональність перед викликом")
+        original_function()
+        print("Додаткова функціональність після виклику")
+    return wrapper_function
+
+@decorator_function
+def display():
+    print("Виклик основної функції")
+
+# Використання
+display()
