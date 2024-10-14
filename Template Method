@@ -1,0 +1,41 @@
+from abc import ABC, abstractmethod
+
+class AbstractClass(ABC):
+    def template_method(self):
+        self.step1()
+        self.step2()
+        self.step3()
+
+    @abstractmethod
+    def step1(self):
+        pass
+
+    @abstractmethod
+    def step2(self):
+        pass
+
+    def step3(self):
+        print("Виконання кроку 3")
+
+class ConcreteClassA(AbstractClass):
+    def step1(self):
+        print("Виконання кроку 1A")
+
+    def step2(self):
+        print("Виконання кроку 2A")
+
+class ConcreteClassB(AbstractClass):
+    def step1(self):
+        print("Виконання кроку 1B")
+
+    def step2(self):
+        print("Виконання кроку 2B")
+
+# Використання
+print("Клас A:")
+class_a = ConcreteClassA()
+class_a.template_method()
+
+print("\nКлас B:")
+class_b = ConcreteClassB()
+class_b.template_method()
