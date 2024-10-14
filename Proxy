@@ -1,0 +1,18 @@
+class RealSubject:
+    def request(self):
+        return "Виконано запит до реального об'єкта."
+
+class Proxy:
+    def __init__(self, real_subject: RealSubject):
+        self.real_subject = real_subject
+
+    def request(self):
+        # Додатковий контроль перед доступом до реального об'єкта
+        print("Контроль доступу...")
+        return self.real_subject.request()
+
+# Використання
+real_subject = RealSubject()
+proxy = Proxy(real_subject)
+
+print(proxy.request())  # Виведе: Контроль доступу... Виконано запит до реального об'єкта.
